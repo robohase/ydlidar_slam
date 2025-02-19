@@ -6,8 +6,10 @@ ydlidar Tmini Proを使ってSlamを動かすデモ
 - OS: Ubuntu 22.04
 - ROS: ROS 2 Humble Hawksbill
 
+# 使用するLiDAR
+[YDLIDAR T-mini Plus](https://www.switch-science.com/products/9751)
 
-## livoxの設定
+## YDLidarの設定
 ```bash
 sudo apt install cmake pkg-config
 sudo apt-get install python3 swig
