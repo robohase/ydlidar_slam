@@ -1,0 +1,1 @@
+- git: {local-name: ydlidar_ros2_driver, uri: git@github.com:robohase/ydlidar_ros2_driver.git, version: v0.0.1}

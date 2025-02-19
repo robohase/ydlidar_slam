@@ -1,0 +1,14 @@
+.cache
+.vscode
+
+
+build
+install
+log
+
+src/*
+!src/ydlidar_slam/
+
+**/__pycache__/**
+
+rosbag2*
