@@ -12,7 +12,7 @@ import os
 def generate_launch_description():
     # Get package directories
     ydlidar_share_dir = get_package_share_directory('ydlidar_ros2_driver')
-    slam_share_dir = get_package_share_directory('ydlidar_slam')
+    slam_share_dir = get_package_share_directory('ydlidar_slam_toolbox')
     
     # Configuration files
     parameter_file = LaunchConfiguration('params_file')

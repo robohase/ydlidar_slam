@@ -1,0 +1,122 @@
+laser_scan_matcher_node:
+  ros__parameters:
+    # General Parameters
+    publish_odom: "odom" # If publish odometry from laser_scan. Empty if not, otherwise name of the topic
+    publish_tf: true # If publish tf odom->base_link
+
+    # Frame IDs
+    base_frame: "base_link" # Which frame to use for the robot base
+    odom_frame: "odom" # Which frame to use for the odom
+    map_frame: "map" # Which frame to use for the map
+    laser_frame: "base_link" # Which frame to use for the laser
+
+    # Keyframe Parameters
+    kf_dist_linear: 0.10 # When to generate keyframe scan (m)
+    kf_dist_angular: 0.1745 # When to generate keyframe scan (rad) - 10.0 * (PI/180.0)
+
+    # CSM Algorithm Parameters
+    max_angular_correction_deg: 45.0 # Maximum angular displacement between scans (deg)
+    max_linear_correction: 0.5 # Maximum translation between scans (m)
+    max_iterations: 10 # Maximum ICP cycle iterations
+    epsilon_xy: 0.000001 # A threshold for stopping (m)
+    epsilon_theta: 0.000001 # A threshold for stopping (rad)
+    max_correspondence_dist: 0.3 # Maximum distance for a correspondence to be valid
+    sigma: 0.010 # Noise in the scan (m)
+    use_corr_tricks: 1 # Use smart tricks for finding correspondences
+    restart: 0 # Restart if error is over threshold
+    restart_threshold_mean_error: 0.01 # Threshold for restarting
+    restart_dt: 1.0 # Displacement for restarting (m)
+    restart_dtheta: 0.1 # Displacement for restarting (rad)
+    clustering_threshold: 0.25 # Max distance for staying in the same clustering
+    orientation_neighbourhood: 20 # Number of neighbour rays used to estimate the orientation
+    use_point_to_line_distance: 1 # If 0, it's vanilla ICP
+    do_alpha_test: 0 # Discard correspondences based on the angles
+    do_alpha_test_thresholdDeg: 20.0 # Discard correspondences based on the angles - threshold angle, in degrees
+    outliers_maxPerc: 0.9 # Percentage of correspondences to consider: if 0.9, always discard the top 10% of correspondences with more error
+
+    # Adaptive outlier algorithm parameters
+    outliers_adaptive_order: 0.7 # Order of the percentile for outlier filtering
+    outliers_adaptive_mult: 2.0 # Multiplier for the percentile for outlier filtering
+
+    # Advanced parameters
+    do_visibility_test: 0 # Discard points that are not likely visible from the new position
+    outliers_remove_doubles: 1 # No two points in laser_sens can have the same corr
+    do_compute_covariance: 0 # If 1, computes the covariance of ICP
+    debug_verify_tricks: 0 # Checks that find_correspondences_tricks gives the right answer
+    use_ml_weights: 0 # Use maximum likelihood weights
+    use_sigma_weights: 0 # Use sigma weights for point cloud matching
+
+slam_toolbox:
+  ros__parameters:
+    # Plugin params
+    solver_plugin: solver_plugins::CeresSolver
+    ceres_linear_solver: SPARSE_NORMAL_CHOLESKY
+    ceres_preconditioner: SCHUR_JACOBI
+    ceres_trust_strategy: LEVENBERG_MARQUARDT
+    ceres_dogleg_type: TRADITIONAL_DOGLEG
+    ceres_loss_function: None
+
+    # ROS Parameters
+    odom_frame: odom
+    map_frame: map
+    base_frame: base_link
+    scan_topic: /scan #/scan
+    mode: mapping #localization
+
+    # if you'd like to immediately start continuing a map at a given pose
+    # or at the dock, but they are mutually exclusive, if pose is given
+    # will use pose
+    #map_file_name: test_steve
+    # map_start_pose: [0.0, 0.0, 0.0]
+    #map_start_at_dock: true
+
+    debug_logging: true
+    throttle_scans: 1
+    transform_publish_period: 0. #if 0 never publishes odometry
+    map_update_interval: 4.0
+    resolution: 0.05
+    max_laser_range: 10.0 #for rastering images
+    minimum_time_interval: 0.5
+    transform_timeout: 0.5
+    tf_buffer_duration: 30.0
+    stack_size_to_use: 40000000 #// program needs a larger stack size to serialize large maps
+    enable_interactive_mode: true
+    min_laser_range: 0.6 #for rastering images
+    max_laser_range: 10.0 #for rastering images
+
+    # General Parameters
+    use_scan_matching: true
+    use_scan_barycenter: true
+    minimum_travel_distance: 0.5
+    minimum_travel_heading: 0.5
+    scan_buffer_size: 5
+    scan_buffer_maximum_scan_distance: 10.0
+    link_match_minimum_response_fine: 0.1  
+    link_scan_maximum_distance: 1.5
+    loop_search_maximum_distance: 3.0
+    do_loop_closing: true 
+    loop_match_minimum_chain_size: 10
+    loop_match_maximum_variance_coarse: 3.0  
+    loop_match_minimum_response_coarse: 0.35    
+    loop_match_minimum_response_fine: 0.45
+
+    # Correlation Parameters - Correlation Parameters
+    correlation_search_space_dimension: 0.5
+    correlation_search_space_resolution: 0.01
+    correlation_search_space_smear_deviation: 0.1 
+
+    # Correlation Parameters - Loop Closure Parameters
+    loop_search_space_dimension: 8.0
+    loop_search_space_resolution: 0.05
+    loop_search_space_smear_deviation: 0.03
+
+    # Scan Matcher Parameters
+    distance_variance_penalty: 0.5      
+    angle_variance_penalty: 1.0    
+
+    fine_search_angle_offset: 0.00349     
+    coarse_search_angle_offset: 0.349   
+    coarse_angle_resolution: 0.0349        
+    minimum_angle_penalty: 0.9
+    minimum_distance_penalty: 0.5
+    use_response_expansion: true

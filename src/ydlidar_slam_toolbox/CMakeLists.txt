@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(ydlidar_slam)
+project(ydlidar_slam_toolbox)
 
 if(NOT CMAKE_C_STANDARD)
   set(CMAKE_C_STANDARD 99)

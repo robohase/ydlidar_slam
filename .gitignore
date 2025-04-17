@@ -7,7 +7,7 @@ install
 log
 
 src/*
-!src/ydlidar_slam/
+!src/ydlidar_slam_toolbox/
 
 **/__pycache__/**
 

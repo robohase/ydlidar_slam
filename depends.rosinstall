@@ -1,1 +1,2 @@
 - git: {local-name: ydlidar_ros2_driver, uri: git@github.com:robohase/ydlidar_ros2_driver.git, version: v0.0.1}
+- git: {local-name: ros2_laser_scan_matcher,  uri: git@github.com:Nexis-R/ros2_laser_scan_matcher.git, version: main}

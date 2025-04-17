@@ -1,4 +1,4 @@
-# ydlidar_slam
+# ydlidar_slam_toolbox
 ydlidar Tmini Proを使ってSlamを動かすデモ
 
 # ネイティブ環境
@@ -36,8 +36,8 @@ source /opt/ros/humble/setup.bash
 sudo apt-get update
 sudo apt install python3-rosdep2 git python3-colcon-common-extensions
 rosdep update
-git clone git@github.com:robohase/ydlidar_slam.git
-cd ydlidar_slam
+git clone git@github.com:robohase/ydlidar_slam_toolbox.git
+cd ydlidar_slam_toolbox
 
 # 依存ROSパッケージインストール
 vcs import --input depends.rosinstall --recursive src
@@ -57,6 +57,6 @@ source install/setup.bash
 
 # 起動方法
 ```bash
-ros2 launch ydlidar_slam cartgrapher.launch.py
+ros2 launch ydlidar_slam_toolbox cartgrapher.launch.py
 ```
 ---
