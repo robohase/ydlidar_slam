@@ -56,7 +56,11 @@ source install/setup.bash
 ```
 
 # 起動方法
+## geotiffマップ作成
+### 起動
 ```bash
-ros2 launch ydlidar_slam_toolbox cartgrapher.launch.py
-```
+ros2 launch ydlidar_slam_toolbox slam_toolbox_with_hectorgeotiff.launch.py
 ---
+```bash
+ros2 launch world_info tag_detectors_launch.py
+```
